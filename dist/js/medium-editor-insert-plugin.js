@@ -1,8 +1,8 @@
-/*! 
+/*!
  * medium-editor-insert-plugin v2.3.2 - jQuery insert plugin for MediumEditor
  *
  * http://linkesch.com/medium-editor-insert-plugin
- * 
+ *
  * Copyright (c) 2014 Pavel Linkesch (http://linkesch.com)
  * Released under the MIT license
  */
@@ -106,7 +106,7 @@ this["MediumInsert"]["Templates"]["src/js/templates/embeds-wrapper.hbs"] = Handl
 },"useData":true});
 
 this["MediumInsert"]["Templates"]["src/js/templates/images-fileupload.hbs"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<input type=\"file\" multiple>";
+    return "<input type=\"file\">";
 },"useData":true});
 
 this["MediumInsert"]["Templates"]["src/js/templates/images-image.hbs"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
@@ -1701,6 +1701,7 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
             $file = $(this.templates['src/js/templates/images-fileupload.hbs']()),
             fileUploadOptions = {
                 dataType: 'json',
+                maxNumberOfFiles: 1,
                 add: function (e, data) {
                     $.proxy(that, 'uploadAdd', e, data)();
                 },
@@ -1762,11 +1763,8 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
         if ($place.is('p')) {
             $place.replaceWith('<div class="medium-insert-active">' + $place.html() + '</div>');
             $place = this.$el.find('.medium-insert-active');
-            if ($place.next().is('p')) {
-                this.core.moveCaret($place.next());
-            } else {
+            if (!$place.next().is('p')) {
                 $place.after('<p><br></p>'); // add empty paragraph so we can move the caret to the next line.
-                this.core.moveCaret($place.next());
             }
         }
 
@@ -1871,9 +1869,6 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
         var $place = this.$el.find('.medium-insert-active'),
             domImage,
             that;
-
-        // Hide editor's placeholder
-        $place.click();
 
         // If preview is allowed and preview image already exists,
         // replace it with uploaded image
