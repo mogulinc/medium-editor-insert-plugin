@@ -576,7 +576,7 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
                 }
             });
 
-            if ($p.length && (($p.text().trim() === '' && !activeAddon) || activeAddon === 'images')) {
+            if ($p.length && (($p.text().trim() === '' && !activeAddon))) {
                 $p.addClass('medium-insert-active');
 
                 // If buttons are displayed on addon paragraph, wait 100ms for possible captions to display
