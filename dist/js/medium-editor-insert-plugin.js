@@ -641,6 +641,9 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
 
             left = $p.position().left - parseInt($buttons.find('.medium-insert-buttons-addons').css('left'), 10) - parseInt($buttons.find('.medium-insert-buttons-addons a:first').css('margin-left'), 10);
             left = left < 0 ? $p.position().left : left;
+            if ($(".medium-editor-placeholder").length > 0) {
+              left -= 60;
+            };
             top = $p.position().top + parseInt($p.css('margin-top'), 10);
 
             if (activeAddon) {
