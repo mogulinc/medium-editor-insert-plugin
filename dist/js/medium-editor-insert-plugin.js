@@ -1373,7 +1373,6 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
                 // Hide addons
                 this.core.hideAddons();
 
-                this.core.moveCaret($empty);
                 this.core.triggerInput();
             }
         }
@@ -1782,6 +1781,8 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
 
                     reader.onload = function (e) {
                         $.proxy(that, 'showImage', e.target.result, data)();
+
+                        $("img", $place).trigger("click");
                     };
 
                     reader.readAsDataURL(data.files[0]);
@@ -2055,7 +2056,6 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
                 this.core.hideAddons();
                 if (!selectedHtml && $empty) {
                     e.preventDefault();
-                    this.core.moveCaret($empty);
                 }
 
                 $('.medium-insert-images-toolbar, .medium-insert-images-toolbar2').remove();
